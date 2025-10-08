@@ -1,0 +1,3 @@
+- Started working on it on 29SEP2025.
+- Made a simple version within 3 hrs.
+- Will continue working on it as people suggests me.
