@@ -1,5 +1,7 @@
 let boxes = document.querySelectorAll(".box");
 let result = document.querySelector(".result");
+let scoreXSpan = document.querySelector(".scoreX span");
+let scoreOSpan = document.querySelector(".scoreO span");
 let turnX = true;
 let isWinner = false;
 let count = 0;
@@ -32,6 +34,8 @@ boxes.forEach((box) => {
       count += 1;
       if (!isWinner && count === 9) showDraw();
     }
+    scoreXSpan.innerText = countX;
+    scoreOSpan.innerText = countO;
   });
 });
 
@@ -53,14 +57,24 @@ function check() {
   });
 }
 
+let countX = JSON.parse(localStorage.getItem("X")) || [0];
+scoreXSpan.innerText = countX;
+// console.log(countX);
+let countO = JSON.parse(localStorage.getItem("O")) || [0];
+scoreOSpan.innerText = countO;
+
 function showWinner(win) {
   if (win != " ") {
     // console.log(win, "is Winner");
     result.innerHTML = `${win} is winner`;
     if (win === "X") {
       result.style.color = "red";
+      countX++;
+      saveCountX();
     } else {
       result.style.color = "green";
+      countO++;
+      saveCountO();
     }
   }
   disableButtons();
@@ -81,89 +95,21 @@ function disableButtons() {
   });
 }
 
-// function webWork() {
-//   const navbar = document.querySelector(".navbar");
-//   const content = document.querySelector(".navContent");
-
-//   let isOpen = false;
-//   let count = 0;
-//   navbar.addEventListener("click", () => {
-//     if (!isOpen) {
-//       gsap.to(content, {
-//         x: 0,
-//         duration: 0.6,
-//         ease: "power2.out",
-//       });
-//     } else {
-//       gsap.to(content, {
-//         x: "-100%",
-//         duration: 0.6,
-//         ease: "power2.out",
-//       });
-//       count -= 2;
-//     }
-//     isOpen = !isOpen;
-//   });
-
-//   document.body.addEventListener("click", () => {
-//     count += 1;
-//     if (isOpen && (count % 2 === 0 || (count * -1) % 2 === 0)) {
-//       gsap.to(content, {
-//         x: "-100%",
-//         duration: 0.6,
-//         ease: "power2.out",
-//       });
-//       isOpen = !isOpen;
-//       count = 0;
-//     }
-//   });
-// }
-
-function menuTask() {
-  const menu = document.querySelector(".navContent");
-  const btn = document.querySelector(".navbar");
-  let menuOpen = false;
-
-  //function to open menu
-  function openMenu() {
-    gsap.to(menu, {
-      x: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
-    menuOpen = true;
-
-    //start listening for outside clicks
-    document.addEventListener("click", handleOutsideClicks);
-  }
-
-  //function to close menu
-  function closeMenu() {
-    gsap.to(menu, {
-      x: "-120%",
-      duration: 0.6,
-      ease: "power3.out",
-    });
-    menuOpen = false;
-
-    //stop listening for outside clicks
-    document.removeEventListener("click", handleOutsideClicks);
-  }
-
-  // toggle with hamburger button
-  btn.addEventListener("click", (e) => {
-    //prevent immediate outside click firing
-    e.stopPropagation();
-
-    menuOpen ? closeMenu() : openMenu();
-  });
-
-  // handle outside clicks
-  function handleOutsideClicks(e) {
-    //if click is not inside menu or hamburger button
-    if (!menu.contains(e.target) && e.target !== btn) {
-      closeMenu();
-    }
-  }
+function saveCountX() {
+  localStorage.setItem("X", JSON.stringify(countX));
 }
-menuTask();
+function saveCountO() {
+  localStorage.setItem("O", JSON.stringify(countO));
+}
+
+document.querySelector(".scoreX button").addEventListener("click", () => {
+  localStorage.removeItem("X");
+  countX = [0];
+  scoreXSpan.innerHTML = `0`;
+});
+
+document.querySelector(".scoreO button").addEventListener("click", () => {
+  localStorage.removeItem("O");
+  countO = [0];
+  scoreOSpan.innerHTML = `0`;
+});

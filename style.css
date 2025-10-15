@@ -18,6 +18,51 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.score {
+  all: revert;
+  background-color: #272626;
+  color: white;
+  width: 250px;
+  padding: 0px 5px 5px 5px;
+  margin: 10px;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  border-radius: 10px;
+
+}
+
+.score h6{
+  /* padding: 1px; */
+  margin: 10px 0px;
+}
+
+.score button{
+  background-color: #453c3c;
+  color: rgb(178, 178, 179);
+  
+  margin: 0px;
+}
+
+.score span {
+  background-color: #5f4f4f;
+  padding: 6px;
+  margin: 0px;
+  border-radius: 8px;
+}
+
+.scoreX{
+  margin: 0px;
+  color: red;
+}
+
+.scoreO{
+  margin: 0px;
+  color: rgb(136, 209, 136);
+}
+
 .top {
   height: 60px;
   width: 300px;
@@ -107,6 +152,7 @@ body::-webkit-scrollbar {
   top: 0;
   left: 0;
   z-index: 1;
+  /* background-color: #fff; */
 }
 .navbar:hover {
   cursor: pointer;
@@ -136,7 +182,7 @@ body::-webkit-scrollbar {
   left: 0;
   padding-top: 70px;
 }
-.navContent div{
+.navContent div {
   width: 150px;
   height: 40px;
   display: flex;
@@ -147,18 +193,17 @@ body::-webkit-scrollbar {
   color: white;
   text-decoration: none;
 }
-.navContent div:hover{
+.navContent div:hover {
   width: 100%;
   background-color: #525050;
-
 }
-.bottom{
+.bottom {
   bottom: 10px;
   color: white;
   font-size: 11px;
 }
 
-.navContent a{
+.navContent a {
   color: white;
   text-decoration: none;
 }
